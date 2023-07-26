@@ -1,0 +1,42 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: pgxusdt
+    network: polygon-zkevm
+    source:
+      address: "0xe1dAd9E06380bC8962e259dDd6a5257A4f56d525"
+      abi: pgxusdt
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Burn
+        - Mint
+        - Swap
+        - Sync
+        - Transfer
+        - UpdateEMA
+      abis:
+        - name: pgxusdt
+          file: pgxusdt/abis/pgxusdt.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Burn(indexed address,uint256,uint256,indexed address)
+          handler: handleBurn
+        - event: Mint(indexed address,uint256,uint256)
+          handler: handleMint
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address,uint256)
+          handler: handleSwap
+        - event: Sync(uint256,uint256,uint256,uint256)
+          handler: handleSync
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: UpdateEMA(uint256,uint256,uint128,uint256)
+          handler: handleUpdateEMA
+      file: pgxusdt/pgxusdt.wasm
