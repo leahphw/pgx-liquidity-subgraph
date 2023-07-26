@@ -7,6 +7,7 @@ import {
   Transfer as TransferEvent,
   UpdateEMA as UpdateEMAEvent
 } from "../generated/pgxusdt/pgxusdt"
+
 import {
   Approval,
   Burn,
